@@ -5,7 +5,7 @@ import HeroSection from "@/components/HeroSection";
 const Index = () => {
   return (
     <motion.div 
-      className="h-screen bg-background overflow-hidden"
+      className="min-h-screen bg-background overflow-x-hidden flex flex-col"
       initial={{ 
         opacity: 0, 
         y: 15
@@ -39,7 +39,7 @@ const Index = () => {
           delay: 0.08,
           ease: [0.4, 0, 0.6, 1]
         }}
-        className="h-full"
+        className="flex-1 min-h-0"
       >
         <HeroSection />
       </motion.div>

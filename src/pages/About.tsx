@@ -27,7 +27,7 @@ const About = () => {
   const currentMember = teamMembers.find(member => member.id === activeTeamMember) || teamMembers[0];
 
   return (
-    <div className="min-h-screen bg-gradient-cosmic">
+    <div className="min-h-screen bg-gradient-cosmic pt-16 sm:pt-20">
       <Header />
       
       <main className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 py-6 sm:py-8 md:py-10 lg:py-12 xl:py-16">

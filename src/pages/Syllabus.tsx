@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Upload, FileText, File, FileImage, X } from "lucide-react";
+import { Upload, FileText, File, X } from "lucide-react";
 import Header from "@/components/Header";
 
 const Syllabus = () => {
@@ -74,10 +74,10 @@ const Syllabus = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-cosmic">
+    <div className="min-h-screen bg-gradient-cosmic pt-16 sm:pt-20">
       <Header />
       
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-6 sm:py-8 lg:py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

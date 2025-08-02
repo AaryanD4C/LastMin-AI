@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Brain, Upload, MessageSquare, FileText, BookOpen, Target } from "lucide-react";
+import { Upload, MessageSquare, FileText, BookOpen, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 
@@ -43,7 +43,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-cosmic">
+    <div className="min-h-screen bg-gradient-cosmic pt-16 sm:pt-20">
       <Header />
       
       <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8">

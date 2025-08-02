@@ -1,23 +1,5 @@
 import React, { useEffect } from 'react';
-import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
-
-// A dedicated component to smoothly animate the counter number.
-const AnimatedCounter = ({ value }: { value: number }) => {
-    const motionValue = useMotionValue(0);
-    // The useTransform hook is used to round the motion value to the nearest integer.
-    const rounded = useTransform(motionValue, latest => Math.round(latest));
-
-    useEffect(() => {
-        // Animate the motionValue to the new 'value' prop using the standalone animate function.
-        const controls = animate(motionValue, value, {
-            duration: 0.5,
-            ease: "easeOut"
-        });
-        return controls.stop;
-    }, [value, motionValue]);
-
-    return <motion.span>{rounded}</motion.span>;
-};
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 
 // A component to render a single character with a reveal animation tied to progress.
 const AnimatedCharacter = ({ char, progress, index, totalChars }: { 

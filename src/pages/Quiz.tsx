@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Target, Clock, Trophy, RotateCcw, Play } from "lucide-react";
 import Header from "@/components/Header";
 
 const Quiz = () => {
-  const [selectedMode, setSelectedMode] = useState<string | null>(null);
-
   const quizModes = [
     {
       id: 'quick',
@@ -36,7 +34,6 @@ const Quiz = () => {
   ];
 
   const handleStartQuiz = (mode: string) => {
-    setSelectedMode(mode);
     // Here you would typically navigate to the actual quiz interface
     console.log(`Starting ${mode} mode`);
   };
@@ -47,10 +44,10 @@ const Quiz = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-cosmic">
+    <div className="min-h-screen bg-gradient-cosmic pt-16 sm:pt-20">
       <Header />
       
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-6 sm:py-8 lg:py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
