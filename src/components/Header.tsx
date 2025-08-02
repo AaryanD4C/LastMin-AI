@@ -142,13 +142,50 @@ const Header = () => {
             </div>
           )}
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-1.5 sm:p-2 text-gray-200 hover:text-white transition-colors duration-200"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
-          </button>
+          {/* Mobile CTA Buttons - Show buttons instead of menu for non-authenticated users */}
+          {!isAuthenticated ? (
+            <div className="flex md:hidden items-center gap-2">
+              <Button 
+                variant="hero" 
+                size="sm" 
+                onClick={handleGetStarted} 
+                className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1.5 rounded-lg text-xs font-medium"
+              >
+                Get Started
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={handleSignIn} 
+                className="border-2 border-gray-600 bg-gray-900/50 hover:bg-gray-800/50 text-gray-200 backdrop-blur-sm px-3 py-1.5 rounded-lg text-xs font-medium"
+              >
+                Sign In
+              </Button>
+            </div>
+          ) : (
+            <>
+              {/* Mobile Logout Button for authenticated users */}
+              <div className="hidden sm:flex md:hidden items-center">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={handleLogout}
+                  className="border-2 border-red-500 bg-red-500/10 hover:bg-red-500/20 text-red-300 hover:text-red-200 backdrop-blur-sm flex items-center justify-center p-2 rounded-lg transition-all duration-200"
+                  title="Log Out"
+                >
+                  <LogOut className="h-4 w-4" />
+                </Button>
+              </div>
+              
+              {/* Mobile Menu Button - only for authenticated users */}
+              <button
+                className="md:hidden p-1.5 sm:p-2 text-gray-200 hover:text-white transition-colors duration-200"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                {isMenuOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
+              </button>
+            </>
+          )}
         </div>
 
         {/* Mobile Menu */}
