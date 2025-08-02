@@ -3,6 +3,7 @@ import { Brain, Menu, X, Info, BookOpen, LayoutDashboard, MessageSquare, Trophy,
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { motion } from "framer-motion";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -209,29 +210,38 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-3 sm:mt-4 py-3 sm:py-4 border-t border-gray-800/50">
+          <motion.div 
+            className="md:hidden mt-3 sm:mt-4 py-3 sm:py-4 border-t border-gray-800/50"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+          >
             <nav className="flex flex-col gap-2 sm:gap-3">
               {isAuthenticated ? (
                 <>
-                  {navigationItems.map((item) => {
+                  {navigationItems.map((item, index) => {
                     const Icon = item.icon;
                     const isActive = location.pathname === item.path;
                     return (
-                      <button
+                      <motion.button
                         key={item.name}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.2, delay: index * 0.1 }}
                         onClick={() => {
                           navigate(item.path);
                           setIsMenuOpen(false);
                         }}
-                        className={`flex items-center gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                        className={`flex items-center gap-3 px-3 sm:px-4 py-3 sm:py-4 rounded-lg text-sm sm:text-base font-medium transition-all duration-200 min-h-[44px] touch-manipulation ${
                           isActive 
                             ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/25' 
-                            : 'text-gray-300 hover:text-white hover:bg-gray-800/50'
+                            : 'text-gray-300 hover:text-white hover:bg-gray-800/50 active:bg-gray-700/50'
                         }`}
                       >
-                        <Icon className="h-4 w-4" />
+                        <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
                         {item.name}
-                      </button>
+                      </motion.button>
                     );
                   })}
                   <div className="border-t border-gray-800/50 pt-3 sm:pt-4 mt-3 sm:mt-4">
@@ -282,7 +292,7 @@ const Header = () => {
                 </div>
               )}
             </nav>
-          </div>
+          </motion.div>
         )}
       </div>
     </header>

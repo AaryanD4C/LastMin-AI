@@ -168,3 +168,35 @@ html {
   overflow-x: hidden;
   min-height: 100vh;
 }
+
+/* Mobile and touch optimizations */
+@media (max-width: 768px) {
+  /* Improve touch targets */
+  button, a, input, textarea, select {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Prevent zoom on input focus */
+  input, textarea, select {
+    font-size: 16px;
+  }
+  
+  /* Better spacing for mobile */
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Enhanced touch targets for tablets */
+  button, a {
+    min-height: 48px;
+  }
+}
+
+/* Custom shadow utilities for interactive elements */
+.shadow-glow-strong {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}

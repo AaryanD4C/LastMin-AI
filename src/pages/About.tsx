@@ -12,14 +12,14 @@ const About = () => {
       id: 1, 
       name: 'Shlok Gaikwad', 
       role: 'Full Stack Developer', 
-      imageUrl: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2487&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      imageUrl: '/shlok-profile-photo.jpg',
       description: 'Expert in building end-to-end web applications with modern technologies and seamless user experiences'
     },
     { 
       id: 2, 
       name: 'Aaryan Kadam', 
       role: 'Generative AI Developer', 
-      imageUrl: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=2487&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      imageUrl: '/aaryan-beach-photo.jpg',
       description: 'Specialist in AI model development and integration, creating intelligent educational solutions'
     },
   ];
@@ -97,8 +97,21 @@ const About = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4 }}
               >
-                <div className="rounded-full w-full h-full bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center shadow-2xl border-4 border-primary/20">
-                  <User className="h-16 w-16 sm:h-18 sm:w-18 md:h-20 md:w-20 lg:h-24 lg:w-24 xl:h-32 xl:w-32 text-white" />
+                <div className="rounded-full w-full h-full overflow-hidden shadow-2xl border-4 border-primary/20">
+                  <img 
+                    src={currentMember.imageUrl} 
+                    alt={currentMember.name}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // Fallback to gradient with User icon if image fails to load
+                      e.currentTarget.style.display = 'none';
+                      const fallbackDiv = e.currentTarget.nextElementSibling as HTMLElement;
+                      if (fallbackDiv) fallbackDiv.style.display = 'flex';
+                    }}
+                  />
+                  <div className="w-full h-full bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center" style={{ display: 'none' }}>
+                    <User className="h-16 w-16 sm:h-18 sm:w-18 md:h-20 md:w-20 lg:h-24 lg:w-24 xl:h-32 xl:w-32 text-white" />
+                  </div>
                 </div>
                 <div className="absolute inset-0 rounded-full bg-gradient-primary/20 animate-pulse"></div>
               </motion.div>

@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Loader } from "@/components/Loader";
 import { AuthProvider } from "@/contexts/AuthContext";
+import GlobalSparkles from "@/components/GlobalSparkles";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -81,6 +82,7 @@ const App = () => {
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </BrowserRouter>
+                <GlobalSparkles />
               </motion.div>
             )}
           </AnimatePresence>

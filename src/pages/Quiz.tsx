@@ -30,12 +30,24 @@ const Quiz = () => {
       icon: Trophy,
       buttonText: 'Challenge',
       color: 'from-purple-500 to-purple-600'
+    },
+    {
+      id: 'flashcard',
+      title: 'Flashcard Review',
+      description: 'Review key concepts with interactive flashcards',
+      icon: RotateCcw,
+      buttonText: 'Start Flashcards',
+      color: 'from-orange-500 to-orange-600'
     }
   ];
 
   const handleStartQuiz = (mode: string) => {
     // Here you would typically navigate to the actual quiz interface
-    console.log(`Starting ${mode} mode`);
+    if (mode === 'flashcard') {
+      handleStartFlashcards();
+    } else {
+      console.log(`Starting ${mode} mode`);
+    }
   };
 
   const handleStartFlashcards = () => {
@@ -65,7 +77,7 @@ const Quiz = () => {
           </div>
 
           {/* Quiz Modes Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div className="flex flex-wrap justify-center gap-6 mb-8 sm:mb-12 max-w-5xl mx-auto">
             {quizModes.map((mode) => {
               const Icon = mode.icon;
               return (
@@ -74,24 +86,27 @@ const Quiz = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 * quizModes.indexOf(mode) }}
+                  className="flex-1 min-w-[260px] max-w-[1024px]"
                 >
-                  <Card className="bg-card/95 backdrop-blur-md border-2 border-white/10 shadow-2xl shadow-primary/25 hover:border-purple-500/50 transition-all duration-300 h-full">
-                    <CardContent className="p-8 text-center h-full flex flex-col">
-                      <div className={`bg-gradient-to-r ${mode.color} p-4 rounded-2xl mb-6 mx-auto w-fit`}>
-                        <Icon className="h-8 w-8 text-white" />
+                  <Card className="bg-card/95 backdrop-blur-md border-2 border-white/10 shadow-2xl shadow-primary/25 hover:border-purple-500/50 active:border-purple-500/70 transition-all duration-300 h-full cursor-pointer touch-manipulation no-sparkle">
+                    <CardContent className="p-6 text-center h-full flex flex-col justify-between min-h-[240px]">
+                      <div className="flex flex-col items-center">
+                        <div className={`bg-gradient-to-r ${mode.color} p-3 rounded-xl mb-4 w-fit`}>
+                          <Icon className="h-6 w-6 text-white" />
+                        </div>
+                        
+                        <h3 className="text-lg font-bold text-white mb-2">
+                          {mode.title}
+                        </h3>
+                        
+                        <p className="text-sm text-gray-300 mb-4 leading-relaxed">
+                          {mode.description}
+                        </p>
                       </div>
-                      
-                      <h3 className="text-2xl font-bold text-white mb-3">
-                        {mode.title}
-                      </h3>
-                      
-                      <p className="text-gray-300 mb-6 flex-1">
-                        {mode.description}
-                      </p>
                       
                       <Button
                         onClick={() => handleStartQuiz(mode.id)}
-                        className={`w-full bg-gradient-to-r ${mode.color} hover:opacity-90 shadow-lg shadow-primary/30 h-12 rounded-lg font-semibold text-white flex items-center justify-center gap-2`}
+                        className={`w-full bg-gradient-to-r ${mode.color} hover:opacity-90 active:opacity-80 shadow-lg shadow-primary/30 h-11 rounded-lg font-medium text-white flex items-center justify-center gap-2 text-sm touch-manipulation`}
                       >
                         <Play className="h-4 w-4" />
                         {mode.buttonText}
@@ -102,38 +117,6 @@ const Quiz = () => {
               );
             })}
           </div>
-
-          {/* Flashcard Review Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <Card className="bg-card/95 backdrop-blur-md border-2 border-white/10 shadow-2xl shadow-primary/25">
-              <CardContent className="p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="bg-gradient-to-r from-orange-500 to-orange-600 p-3 rounded-xl">
-                    <RotateCcw className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <h2 className="text-2xl font-bold text-white mb-2">
-                      Flashcard Review
-                    </h2>
-                    <p className="text-gray-300">
-                      Review key concepts with interactive flashcards
-                    </p>
-                  </div>
-                  <Button
-                    onClick={handleStartFlashcards}
-                    variant="outline"
-                    className="border-2 border-orange-500 bg-orange-500/10 hover:bg-orange-500/20 text-orange-300 hover:text-orange-200 backdrop-blur-sm px-8 py-3 rounded-lg font-semibold"
-                  >
-                    Start Flashcards
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
 
           {/* Additional Info */}
           <motion.div
