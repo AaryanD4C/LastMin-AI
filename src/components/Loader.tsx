@@ -72,15 +72,15 @@ export const Loader: React.FC<LoaderProps> = ({ progress, onFinished }) => {
 
     return (
         <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white"
-            exit={{ opacity: 0, transition: { duration: 0.75, delay: 0.5, ease: "easeOut" } }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-background via-background/95 to-background text-white"
+            exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.8, delay: 0.3, ease: "easeInOut" } }}
         >
             <motion.div
                 className="relative w-full max-w-5xl mx-auto p-8 text-center flex flex-col items-center justify-center min-h-screen"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                exit={{ opacity: 0, transition: { duration: 0.5 } }}
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 1, ease: "easeOut" }}
+                exit={{ opacity: 0, y: -20, scale: 0.95, transition: { duration: 0.6 } }}
             >
                 {/* Container for the letter-by-letter animated text */}
                 <div className="text-center">
@@ -92,6 +92,9 @@ export const Loader: React.FC<LoaderProps> = ({ progress, onFinished }) => {
                             WebkitTextFillColor: 'transparent',
                             backgroundClip: 'text'
                         }}
+                        initial={{ scale: 0.8 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
                     >
                         {headingLines.map((line, lineIndex) => (
                             <div key={lineIndex} className="block">
@@ -109,16 +112,29 @@ export const Loader: React.FC<LoaderProps> = ({ progress, onFinished }) => {
                     </motion.h1>
                     
                     {/* Progress bar */}
-                    <div className="w-full max-w-md mx-auto mb-8">
-                        <div className="h-1 bg-gray-700 rounded-full overflow-hidden">
+                    <motion.div 
+                        className="w-full max-w-md mx-auto mb-8"
+                        initial={{ opacity: 0, width: 0 }}
+                        animate={{ opacity: 1, width: "100%" }}
+                        transition={{ duration: 0.6, delay: 0.5 }}
+                    >
+                        <div className="h-1 bg-gray-700/50 rounded-full overflow-hidden backdrop-blur-sm">
                             <motion.div 
-                                className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
+                                className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-600 rounded-full shadow-lg shadow-purple-500/50"
                                 initial={{ width: 0 }}
                                 animate={{ width: `${progress}%` }}
                                 transition={{ duration: 0.3, ease: "easeOut" }}
                             />
                         </div>
-                    </div>
+                        <motion.div 
+                            className="text-center mt-2"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.8 }}
+                        >
+                            <span className="text-xs text-gray-400 font-medium">{progress}%</span>
+                        </motion.div>
+                    </motion.div>
                     
                     <div className="text-lg md:text-xl text-gray-300 font-light max-w-lg mx-auto">
                         {Array.from(paragraphLine).map((char, charInLineIndex) => (

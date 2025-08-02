@@ -27,27 +27,43 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // Check if user is logged in on app start
   useEffect(() => {
-    const savedAuth = localStorage.getItem('isAuthenticated');
-    const savedUser = localStorage.getItem('user');
-    
-    if (savedAuth === 'true' && savedUser) {
-      setIsAuthenticated(true);
-      setUser(JSON.parse(savedUser));
+    try {
+      const savedAuth = localStorage.getItem('isAuthenticated');
+      const savedUser = localStorage.getItem('user');
+      
+      if (savedAuth === 'true' && savedUser) {
+        const userData = JSON.parse(savedUser);
+        setIsAuthenticated(true);
+        setUser(userData);
+      }
+    } catch (error) {
+      console.error('Error loading user data:', error);
+      // Clear corrupted data
+      localStorage.removeItem('isAuthenticated');
+      localStorage.removeItem('user');
     }
   }, []);
 
   const login = (userData: any) => {
-    setIsAuthenticated(true);
-    setUser(userData);
-    localStorage.setItem('isAuthenticated', 'true');
-    localStorage.setItem('user', JSON.stringify(userData));
+    try {
+      setIsAuthenticated(true);
+      setUser(userData);
+      localStorage.setItem('isAuthenticated', 'true');
+      localStorage.setItem('user', JSON.stringify(userData));
+    } catch (error) {
+      console.error('Error saving user data:', error);
+    }
   };
 
   const logout = () => {
-    setIsAuthenticated(false);
-    setUser(null);
-    localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('user');
+    try {
+      setIsAuthenticated(false);
+      setUser(null);
+      localStorage.removeItem('isAuthenticated');
+      localStorage.removeItem('user');
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
   };
 
   const value = {

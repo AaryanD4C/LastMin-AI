@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Bot, Send, Lightbulb, Calculator, Atom, Database } from "lucide-react";
+import { Bot, Send, Lightbulb, Calculator, Atom, Database, BookOpen, PenTool, Clock, Target } from "lucide-react";
 import Header from "@/components/Header";
 
 const AskAI = () => {
@@ -30,6 +30,26 @@ const AskAI = () => {
       icon: Database, 
       title: 'Science Help', 
       description: 'Assistance with scientific concepts and formulas'
+    },
+    { 
+      icon: BookOpen, 
+      title: 'Topic Summary', 
+      description: 'Quick summaries of important topics'
+    },
+    { 
+      icon: PenTool, 
+      title: 'Essay Help', 
+      description: 'Writing assistance and essay structure guidance'
+    },
+    { 
+      icon: Clock, 
+      title: 'Quick Review', 
+      description: 'Fast revision for last-minute preparation'
+    },
+    { 
+      icon: Target, 
+      title: 'Exam Focus', 
+      description: 'Target specific exam topics and questions'
     }
   ];
 
@@ -161,24 +181,60 @@ const AskAI = () => {
             </CardContent>
           </Card>
 
-          {/* Quick Actions Section */}
+          {/* Quick Actions Section with Single Infinite Loop */}
           <div className="mb-8">
             <h2 className="text-2xl font-bold text-white mb-6">Quick actions:</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {quickActions.map((action, index) => {
-                const Icon = action.icon;
-                return (
-                  <Card key={index} className="bg-card/95 backdrop-blur-md border border-white/10 hover:border-purple-500/50 transition-colors cursor-pointer">
-                    <CardContent className="p-4">
-                      <div className="flex items-center gap-3 mb-2">
-                        <Icon className="h-5 w-5 text-purple-400" />
-                        <h3 className="text-white font-medium text-sm">{action.title}</h3>
+            
+            <style>
+              {`
+                @keyframes marquee-infinite {
+                  from { transform: translateX(0); }
+                  to { transform: translateX(-100%); }
+                }
+                .animate-marquee-infinite {
+                  animation: marquee-infinite 40s linear infinite;
+                }
+                .animate-marquee-infinite:hover {
+                  animation-play-state: paused;
+                }
+              `}
+            </style>
+            
+            <div className="relative overflow-hidden">
+              <div className="flex w-full overflow-hidden">
+                <div className="flex flex-shrink-0 py-2 animate-marquee-infinite">
+                  {/* All quick actions in one continuous loop */}
+                  {quickActions.map((action, index) => {
+                    const Icon = action.icon;
+                    return (
+                      <div key={`action-p1-${index}`} className="px-3 flex-shrink-0">
+                        <Card className="bg-card/95 border border-white/10 hover:border-purple-500/50 transition-all duration-300 cursor-pointer w-72 h-56 rounded-2xl hover:scale-110 hover:z-10 hover:shadow-2xl hover:shadow-purple-500/25 hover:border-purple-500">
+                          <CardContent className="p-6 h-full flex flex-col justify-center items-center text-center">
+                            <Icon className="h-6 w-6 text-purple-400 mb-4" />
+                            <h3 className="text-white font-medium text-sm mb-3 leading-tight">{action.title}</h3>
+                            <p className="text-gray-400 text-xs leading-relaxed px-3">{action.description}</p>
+                          </CardContent>
+                        </Card>
                       </div>
-                      <p className="text-gray-400 text-xs">{action.description}</p>
-                    </CardContent>
-                  </Card>
-                );
-              })}
+                    );
+                  })}
+                  {/* Duplicate for seamless loop */}
+                  {quickActions.map((action, index) => {
+                    const Icon = action.icon;
+                    return (
+                      <div key={`action-p2-${index}`} className="px-3 flex-shrink-0">
+                        <Card className="bg-card/95 border border-white/10 hover:border-purple-500/50 transition-all duration-300 cursor-pointer w-72 h-56 rounded-2xl hover:scale-110 hover:z-10 hover:shadow-2xl hover:shadow-purple-500/25 hover:border-purple-500">
+                          <CardContent className="p-6 h-full flex flex-col justify-center items-center text-center">
+                            <Icon className="h-6 w-6 text-purple-400 mb-4" />
+                            <h3 className="text-white font-medium text-sm mb-3 leading-tight">{action.title}</h3>
+                            <p className="text-gray-400 text-xs leading-relaxed px-3">{action.description}</p>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>

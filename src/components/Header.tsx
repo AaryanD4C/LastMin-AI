@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Brain, Menu, X, Home, BookOpen, LayoutDashboard, MessageSquare, Trophy, LogOut } from "lucide-react";
+import { Brain, Menu, X, Info, BookOpen, LayoutDashboard, MessageSquare, Trophy, LogOut, User } from "lucide-react";
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
@@ -24,19 +24,19 @@ const Header = () => {
   };
 
   const navigationItems = [
-    { name: 'HOME', icon: Home, path: '/' },
     { name: 'SYLLABUS', icon: BookOpen, path: '/syllabus' },
-    { name: 'DASHBOARD', icon: LayoutDashboard, path: '/dashboard' },
     { name: 'ASK AI', icon: MessageSquare, path: '/ask-ai' },
+    { name: 'DASHBOARD', icon: LayoutDashboard, path: '/dashboard' },
     { name: 'QUIZ', icon: Trophy, path: '/quiz' },
+    { name: 'ABOUT US', icon: Info, path: '/about' },
   ];
 
   return (
     <header className="bg-black/80 backdrop-blur-xl border-b border-gray-800/50 sticky top-0 z-50">
       <div className="container mx-auto px-3 sm:px-4 md:px-6 py-2 sm:py-3">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between relative">
           {/* Logo */}
-          <div className="flex items-center gap-2 sm:gap-3 cursor-pointer" onClick={() => navigate('/')}>
+          <div className="flex items-center gap-2 sm:gap-3">
             <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-1.5 sm:p-2 rounded-lg">
               <Brain className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-white" />
             </div>
@@ -48,7 +48,7 @@ const Header = () => {
 
           {/* Desktop Navigation - Centered */}
           {isAuthenticated && (
-            <nav className="hidden lg:flex items-center justify-center flex-1 mx-8 ml-26">
+            <nav className="hidden lg:flex items-center justify-center absolute left-1/2 transform -translate-x-1/2">
               <div className="flex items-center gap-4">
                 {navigationItems.map((item) => {
                   const Icon = item.icon;
@@ -74,7 +74,7 @@ const Header = () => {
 
           {/* Tablet Navigation */}
           {isAuthenticated && (
-            <nav className="hidden md:flex lg:hidden items-center justify-center flex-1 mx-4">
+            <nav className="hidden md:flex lg:hidden items-center justify-center absolute left-1/2 transform -translate-x-1/2">
               <div className="flex items-center gap-3">
                 {navigationItems.map((item) => {
                   const Icon = item.icon;
@@ -102,7 +102,9 @@ const Header = () => {
           <div className="hidden lg:flex items-center gap-3">
             {isAuthenticated ? (
               <div className="flex items-center gap-4">
-                <span className="text-gray-300 text-sm font-medium hidden xl:inline">Welcome, {user?.name || 'User'}</span>
+                <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full border-2 border-purple-600/60">
+                  <User className="h-4 w-4 text-white" />
+                </div>
                 <Button 
                   variant="outline" 
                   size="sm" 
@@ -177,7 +179,12 @@ const Header = () => {
                     );
                   })}
                   <div className="border-t border-gray-800/50 pt-3 sm:pt-4 mt-3 sm:mt-4">
-                    <div className="text-gray-300 text-sm mb-2 sm:mb-3 px-3 sm:px-4 font-medium">Welcome, {user?.name || 'User'}</div>
+                    <div className="flex items-center gap-3 px-3 sm:px-4 mb-2 sm:mb-3">
+                      <div className="flex items-center justify-center w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full border-2 border-purple-600/60">
+                        <User className="h-4 w-4 text-white" />
+                      </div>
+                      <span className="text-gray-300 text-sm font-medium">{user?.name || 'User'}</span>
+                    </div>
                     <Button 
                       variant="outline" 
                       size="sm" 

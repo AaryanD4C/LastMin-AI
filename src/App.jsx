@@ -14,6 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import Syllabus from "./pages/Syllabus";
 import AskAI from "./pages/AskAI";
 import Quiz from "./pages/Quiz";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -59,7 +60,13 @@ const App = () => {
             {isLoading ? (
               <Loader key="loader" progress={progress} onFinished={handleLoadingFinished} />
             ) : (
-              <div key="content">
+              <motion.div 
+                key="content"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                style={{ minHeight: '100vh', overflow: 'hidden' }}
+              >
                 <BrowserRouter>
                   <Routes>
                     <Route path="/" element={<Index />} />
@@ -69,11 +76,12 @@ const App = () => {
                     <Route path="/syllabus" element={<Syllabus />} />
                     <Route path="/ask-ai" element={<AskAI />} />
                     <Route path="/quiz" element={<Quiz />} />
+                    <Route path="/about" element={<About />} />
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                 </BrowserRouter>
-              </div>
+              </motion.div>
             )}
           </AnimatePresence>
         </AuthProvider>

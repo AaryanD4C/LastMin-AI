@@ -68,7 +68,7 @@ const UploadSection = () => {
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Upload Area */}
-              <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 transition-colors">
+              <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 transition-colors mx-auto max-w-2xl">
                 <input
                   type="file"
                   accept=".pdf,.docx,.txt"
@@ -133,17 +133,17 @@ const UploadSection = () => {
               )}
 
               {/* Generate Button */}
-              <div className="flex gap-3">
+              <div className="flex justify-center gap-3">
                 <Button 
                   variant="hero" 
                   size="lg" 
-                  className="flex-1"
+                  className="w-full max-w-xs"
                   onClick={handleGenerate}
                   disabled={!uploadedFile || isGenerating}
                 >
                   {isGenerating ? 'Generating...' : 'Generate Notes'}
                 </Button>
-                <Button variant="study" size="lg" disabled={!uploadedFile}>
+                <Button variant="study" size="lg" disabled={!uploadedFile} className="w-full max-w-xs">
                   Preview
                 </Button>
               </div>

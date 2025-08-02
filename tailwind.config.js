@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss";
+// import type { Config } from "tailwindcss";
 
 export default {
 	darkMode: ["class"],
@@ -17,16 +17,12 @@ export default {
 				'2xl': '1400px'
 			}
 		},
-		screens: {
-			'xs': '475px',
-			'sm': '640px',
-			'md': '768px',
-			'lg': '1024px',
-			'xl': '1280px',
-			'2xl': '1536px',
-		},
 		extend: {
+			screens: {
+				'xs': '475px',
+			},
 			spacing: {
+				'24': '6rem',
 				'26': '6.5rem',
 			},
 			colors: {

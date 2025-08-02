@@ -12,8 +12,7 @@ const Signup = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    password: '',
-    confirmPassword: ''
+    password: ''
   });
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -21,11 +20,6 @@ const Signup = () => {
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match');
-      return;
-    }
     
     setIsLoading(true);
     
@@ -125,29 +119,19 @@ const Signup = () => {
                 </div>
               </div>
               
-              <div className="space-y-1">
-                <Label htmlFor="confirmPassword" className="text-sm text-foreground font-medium">Confirm Password</Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type="password"
-                    placeholder="Confirm your password"
-                    value={formData.confirmPassword}
-                    onChange={handleInputChange}
-                    className="pl-10 bg-input/60 border-border/60 h-10 rounded-lg shadow-inner text-sm"
-                    required
-                  />
-                </div>
-              </div>
-              
               <Button
                 type="submit"
-                className="w-full bg-gradient-primary hover:opacity-90 shadow-lg shadow-primary/30 h-10 rounded-lg font-semibold text-sm mt-4"
+                className="w-full bg-gradient-primary hover:bg-gradient-primary/90 shadow-lg shadow-primary/30 h-10 rounded-lg font-semibold text-sm mt-4 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 disabled={isLoading}
               >
-                {isLoading ? "Creating account..." : "Create Account"}
+                {isLoading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    Creating account...
+                  </div>
+                ) : (
+                  "Create Account"
+                )}
               </Button>
             </form>
             

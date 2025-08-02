@@ -74,8 +74,8 @@ const Dashboard = () => {
                 transition={{ duration: 0.6, delay: 0.1 * index }}
               >
                 <Link to={feature.link}>
-                  <Card className={`bg-card/80 backdrop-blur-sm border-border hover:shadow-glow transition-all duration-300 cursor-pointer group ${feature.color} h-full`}>
-                    <CardHeader className="space-y-3 sm:space-y-4 p-4 sm:p-6">
+                  <Card className={`bg-card/80 backdrop-blur-sm border-border hover:shadow-glow transition-all duration-300 cursor-pointer group ${feature.color} h-full flex flex-col`}>
+                    <CardHeader className="space-y-3 sm:space-y-4 p-4 sm:p-6 flex-grow">
                       <div className="flex items-center gap-2 sm:gap-3">
                         <div className="bg-gradient-primary p-1.5 sm:p-2 rounded-lg group-hover:scale-110 transition-transform">
                           <feature.icon className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-primary-foreground" />
@@ -88,7 +88,7 @@ const Dashboard = () => {
                         {feature.description}
                       </CardDescription>
                     </CardHeader>
-                    <CardContent className="p-4 sm:p-6 pt-0">
+                    <CardContent className="p-4 sm:p-6 pt-0 mt-auto">
                       <Button 
                         className="w-full bg-gradient-primary hover:opacity-90 shadow-soft text-sm sm:text-base"
                       >
