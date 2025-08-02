@@ -128,8 +128,8 @@ const Header = () => {
           </div>
 
           {/* Tablet CTA Buttons */}
-          {isAuthenticated && (
-            <div className="hidden md:flex lg:hidden items-center">
+          <div className="hidden md:flex lg:hidden items-center gap-3">
+            {isAuthenticated ? (
               <Button 
                 variant="outline" 
                 size="sm" 
@@ -139,8 +139,27 @@ const Header = () => {
               >
                 <LogOut className="h-4 w-4" />
               </Button>
-            </div>
-          )}
+            ) : (
+              <>
+                <Button 
+                  variant="hero" 
+                  size="sm" 
+                  onClick={handleGetStarted} 
+                  className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-medium"
+                >
+                  Get Started
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={handleSignIn} 
+                  className="border-2 border-gray-600 bg-gray-900/50 hover:bg-gray-800/50 text-gray-200 backdrop-blur-sm px-4 py-2 rounded-lg text-sm font-medium"
+                >
+                  Sign In
+                </Button>
+              </>
+            )}
+          </div>
 
           {/* Mobile CTA Buttons - Show buttons instead of menu for non-authenticated users */}
           {!isAuthenticated ? (
