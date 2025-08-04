@@ -14,6 +14,7 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Syllabus from "./pages/Syllabus";
 import AskAI from "./pages/AskAI";
+import AITutor from "./pages/AITutor";
 import Quiz from "./pages/Quiz";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
@@ -76,6 +77,7 @@ const App = () => {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/syllabus" element={<Syllabus />} />
                     <Route path="/ask-ai" element={<AskAI />} />
+                    <Route path="/ai-tutor" element={<AITutor />} />
                     <Route path="/quiz" element={<Quiz />} />
                     <Route path="/about" element={<About />} />
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
